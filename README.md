@@ -2,7 +2,7 @@
 
 In the Kinvey console click "Add an App", enter the name "TestDrive" when prompted.
 
-![Add an app in Console](android-testdrive/ss-4.png)
+![Add an app in Console](docs/images/android-testdrive-ss-4.png)
 
 ## Set up TestDrive Project
 
