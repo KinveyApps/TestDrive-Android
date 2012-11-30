@@ -28,8 +28,8 @@ public class KinveyTestDriveActivity extends Activity {
 	 * handshake.
 	 * TODO: create a backend on the console, then cut and paste the key and secret here
 	 */
-	private static final String KINVEY_APP_KEY = "your_app_key";
-	private static final String KINVEY_APP_SECRET = "your_app_secret";
+	private static final String KINVEY_APP_KEY = your_app_key;
+	private static final String KINVEY_APP_SECRET = your_app_secret;
 
 	/**
 	 * Keep a handle on the client since it will be needed for most calls to Kinvey
