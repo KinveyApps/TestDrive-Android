@@ -2,7 +2,7 @@
 
 In the Kinvey console click "Add an App", enter the name "TestDrive" when prompted.
 
-![Add an app in Console](docs/images/android-testdrive-ss-4.png)
+![Add an app in Console](https://github.com/KinveyApps/TestDrive-Android/blob/master/docs/images/android-testdrive-ss-4.png)
 
 ## Set up TestDrive Project
 
@@ -132,8 +132,8 @@ private void load() {
 ## Run the App
 Run the sample project and you will have two buttons, one to save and one to load the object. 
 
-![Save the test object](android-testdrive/ss-1.png)
-![Load the test object](android-testdrive/ss-2.png)
+![Save the test object](https://github.com/KinveyApps/TestDrive-Android/blob/master/docs/images/android-testdrive-ss-1.png)
+![Load the test object](https://github.com/KinveyApps/TestDrive-Android/blob/master/docs/images/android-testdrive-ss-2.png)
 
 ## Next steps
 
