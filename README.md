@@ -28,7 +28,7 @@ public class KinveyTestDriveActivity extends Activity {
 
 With Kinvey's Android library you model data using any class that implements `MappedEntity` interface. The sample project comes with a `TestEntity` class that has a string `name`.
 
-`TestObject.java` looks like this:
+`TestEntity.java` looks like this:
 
 ```java
 public class TestEntity implements MappedEntity {
