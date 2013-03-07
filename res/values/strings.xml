@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kinvey TestDrive</string>
+
+    <string name="app_name">TestDrive</string>
     <string name="menu_settings">Settings</string>
-    <string name="text_output">Output</string>
-    <string name="load">Load</string>
-    <string name="save">Save</string>
+
+    <string name="error">[Error]</string>
+    <string name="error_format">[Error] %s</string>
+    
 </resources>
