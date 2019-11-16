@@ -18,5 +18,7 @@ import com.google.api.client.util.Key
 
 data class Entity(
     @Key("_id")
-    var title: String? = null
+    var title: String? = null,
+    @Key("Description")
+    var description: String? = null
 ) : GenericJson()

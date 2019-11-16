@@ -14,12 +14,16 @@ import com.kinvey.android.callback.KinveyUserCallback
 import com.kinvey.android.model.User
 import com.kinvey.android.store.DataStore
 import com.kinvey.android.store.UserStore
+import com.kinvey.java.AbstractClient
 import com.kinvey.java.Query
 import com.kinvey.java.core.KinveyClientCallback
+import com.kinvey.java.dto.BaseUser
 import com.kinvey.java.model.KinveyReadResponse
 import com.kinvey.java.store.StoreType
 import com.kinvey.sample.testdrive.Constants.COLLECTION_NAME
 import com.kinvey.sample.testdrive.Constants.ENTITY_ID
+import com.kinvey.sample.testdrive.Constants.USER_NAME
+import com.kinvey.sample.testdrive.Constants.USER_PASSWORD
 import com.kinvey.sample.testdrive.Constants._ID
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -34,16 +38,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         refreshProgress?.isIndeterminate = true
-        kinveyClient = Builder<User>(this).build()
-        dataStore = DataStore.collection(COLLECTION_NAME, Entity::class.java, StoreType.AUTO, kinveyClient)
+        kinveyClient = App.instance?.kinveyClient
+        dataStore = DataStore.collection(COLLECTION_NAME, Entity::class.java, StoreType.NETWORK, kinveyClient)
+        initLogin()
+    }
+
+    private fun initLogin() {
+        val isLogin = kinveyClient?.isUserLoggedIn ?: false
+        loginBtn.text = if (isLogin) "Logout" else "Login"
+        UiUtils.enableLayout(buttonsPanel, isLogin)
+        loginBtn.setOnClickListener {
+            if (kinveyClient?.isUserLoggedIn == false) { login() }
+            else logout()
+        }
+    }
+
+    private fun login() {
+        showProgress(true)
         if (kinveyClient?.isUserLoggedIn == false) {
-            showProgress(true)
             try {
-                UserStore.login(kinveyClient as Client<User>, object : KinveyUserCallback<User> {
+                UserStore.login(USER_NAME, USER_PASSWORD, kinveyClient as Client<User>,
+                object : KinveyUserCallback<User> {
                     override fun onSuccess(result: User) {
                         showProgress(false)
                         Timber.i("Logged in successfully as ${result.id}")
                         showToast("New implicit user logged in successfully as ${result.id}")
+                        initLogin()
                     }
                     override fun onFailure(error: Throwable) {
                         showProgress(false)
@@ -59,12 +79,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun logout() {
+        showProgress(true)
+        UserStore.logout(kinveyClient as AbstractClient<BaseUser>,
+        object: KinveyClientCallback<Void?> {
+            override fun onSuccess(result: Void?) {
+                showProgress(false)
+                Timber.i("Logged out successfully")
+                showToast("Logged out successfully")
+                initLogin()
+            }
+            override fun onFailure(error: Throwable) {
+                showProgress(false)
+                Timber.e("Login Failure: $error")
+                showToast("Login error: ${error.message}")
+            }
+        })
+    }
+
     fun onLoadClick(view: View?) {
         showProgress(true)
         dataStore?.find(ENTITY_ID, object : KinveyClientCallback<Entity> {
             override fun onSuccess(result: Entity) {
                 showProgress(false)
-                showToast("Save Worked!\nTitle: ${result.title}\nDescription: ${result["Description"]}")
+                showToast("Save Worked!\nTitle: ${result.title}\nDescription: ${result.description}")
             }
             override fun onFailure(error: Throwable) {
                 showProgress(false)
@@ -116,11 +154,11 @@ class MainActivity : AppCompatActivity() {
     fun onSaveClick(view: View?) {
         showProgress(true)
         val entity = Entity(ENTITY_ID)
-        entity["Description"] = "This is a description of a dynamically-added Entity property."
+        entity.description = "This is a description of a dynamically-added Entity property."
         dataStore?.save(entity, object : KinveyClientCallback<Entity> {
             override fun onSuccess(result: Entity) {
                 showProgress(false)
-                showToast("Entity Saved\nTitle: ${result.title}\nDescription: ${result["Description"]}")
+                showToast("Entity Saved\nTitle: ${result.title}\nDescription: ${result.description}")
             }
 
             override fun onFailure(error: Throwable) {
