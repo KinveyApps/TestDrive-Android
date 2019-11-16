@@ -13,8 +13,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".TestDrive" >
+                android:layout_height="match_parent">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +25,7 @@
             android:orientation="vertical" >
 
         <Button
-                android:id="@+id/save"
+                android:id="@+id/saveBtn"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +33,7 @@
                 android:text="Save" />
 
         <Button
-                android:id="@+id/load"
+                android:id="@+id/loadBtn"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,13 +44,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Load All"
-                android:id="@+id/loadAll"
+                android:id="@+id/loadAllBtn"
                 android:onClick="onLoadAllClick"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Load Query"
-                android:id="@+id/query"
+                android:id="@+id/queryBtn"
                 android:onClick="onQueryClick" />
 
 
@@ -59,11 +58,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delete One"
-                android:id="@+id/delete"
+                android:id="@+id/deleteBtn"
                 android:onClick="onDeleteClick" />
 
         <ProgressBar
-                android:id="@+id/refresh_progress"
+                android:id="@+id/refreshProgress"
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
